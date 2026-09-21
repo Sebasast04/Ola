@@ -1,351 +1,675 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ola 🌻</title>
 
-    <title>Ola 🌻</title>
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
 
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+html, body {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
 
-        body {
-            overflow: hidden;
-            height: 100vh;
-            background: linear-gradient(
-                to bottom,
-                #18152f 0%,
-                #252044 45%,
-                #e98b6d 100%
-            );
-            font-family: Georgia, serif;
-        }
+body {
+    font-family: Georgia, "Times New Roman", serif;
+    background: #17152d;
+}
 
-        .contenedor {
-            position: relative;
-            width: 100%;
-            height: 100vh;
-            overflow: hidden;
-        }
+/* =========================
+   ESCENARIO
+========================= */
 
-        /* Luna */
-        .luna {
-            position: absolute;
-            width: 150px;
-            height: 150px;
-            border-radius: 50%;
-            background: #fff5bd;
-            top: 95px;
-            right: 55px;
-            box-shadow: 0 0 35px rgba(255, 245, 189, 0.35);
-        }
+.scene {
+    position: relative;
+    width: 100%;
+    height: 100dvh;
+    overflow: hidden;
 
-        /* Estrellas */
-        .estrella {
-            position: absolute;
-            color: white;
-            font-size: 20px;
-            animation: parpadear 2s infinite alternate;
-        }
+    background:
+        linear-gradient(
+            to bottom,
+            #15132b 0%,
+            #211b3d 30%,
+            #493252 55%,
+            #c66f68 78%,
+            #f1a36d 100%
+        );
+}
 
-        .e1 {
-            top: 170px;
-            left: 15%;
-        }
+/* brillo del horizonte */
 
-        .e2 {
-            top: 330px;
-            right: 15%;
-        }
+.horizon-glow {
+    position: absolute;
+    width: 100%;
+    height: 35%;
+    bottom: 8%;
+    left: 0;
 
-        .e3 {
-            top: 245px;
-            left: 30%;
-        }
+    background: radial-gradient(
+        ellipse at center,
+        rgba(255,190,112,.45),
+        transparent 70%
+    );
 
-        @keyframes parpadear {
-            from {
-                opacity: 0.3;
-            }
-            to {
-                opacity: 1;
-            }
-        }
+    filter: blur(15px);
+}
 
-        /* Texto */
-        .texto {
-            position: absolute;
-            top: 80px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 90%;
-            text-align: center;
-            color: #fff4c5;
-            z-index: 10;
-        }
+/* =========================
+   ESTRELLAS
+========================= */
 
-        .texto h1 {
-            font-size: 58px;
-            line-height: 0.95;
-            margin-bottom: 20px;
-        }
+.stars {
+    position: absolute;
+    inset: 0;
+}
 
-        .texto .flor {
-            font-size: 42px;
-            margin-bottom: 15px;
-        }
+.star {
+    position: absolute;
+    width: 4px;
+    height: 4px;
+    background: #fff9df;
+    border-radius: 50%;
+    box-shadow: 0 0 8px rgba(255,255,220,.9);
 
-        /* Flores */
-        .flores {
-            position: absolute;
-            bottom: 115px;
-            width: 100%;
-            height: 430px;
-        }
+    animation: twinkle 2.5s infinite ease-in-out;
+}
 
-        .flor-grande {
-            position: absolute;
-            left: 50%;
-            top: 40px;
-            transform: translateX(-50%);
-            width: 210px;
-            height: 210px;
-            animation: balanceo 4s ease-in-out infinite;
-        }
+.s1 { top: 13%; left: 13%; animation-delay: .3s; }
+.s2 { top: 20%; left: 29%; animation-delay: 1.2s; }
+.s3 { top: 10%; left: 72%; animation-delay: .8s; }
+.s4 { top: 28%; left: 86%; animation-delay: 1.8s; }
+.s5 { top: 33%; left: 8%; animation-delay: .5s; }
+.s6 { top: 17%; left: 53%; animation-delay: 1.5s; }
+.s7 { top: 37%; left: 67%; animation-delay: .2s; }
 
-        .flor-izquierda {
-            position: absolute;
-            left: 2%;
-            top: 190px;
-            transform: scale(0.72);
-        }
+@keyframes twinkle {
+    0%,100% {
+        opacity: .25;
+        transform: scale(.7);
+    }
 
-        .flor-derecha {
-            position: absolute;
-            right: 0%;
-            top: 175px;
-            transform: scale(0.75);
-        }
+    50% {
+        opacity: 1;
+        transform: scale(1.5);
+    }
+}
 
-        .petalo {
-            position: absolute;
-            width: 90px;
-            height: 130px;
-            background: #ffd51f;
-            border-radius: 50%;
-            left: 60px;
-            top: 35px;
-            transform-origin: 45px 100px;
-        }
+/* =========================
+   LUNA
+========================= */
 
-        .p1 { transform: rotate(0deg); }
-        .p2 { transform: rotate(60deg); }
-        .p3 { transform: rotate(120deg); }
-        .p4 { transform: rotate(180deg); }
-        .p5 { transform: rotate(240deg); }
-        .p6 { transform: rotate(300deg); }
+.moon {
+    position: absolute;
 
-        .centro {
-            position: absolute;
-            width: 75px;
-            height: 75px;
-            background: #8a4500;
-            border-radius: 50%;
-            left: 67px;
-            top: 65px;
-            z-index: 3;
-            box-shadow: inset 0 5px 12px rgba(0,0,0,0.25);
-        }
+    width: 135px;
+    height: 135px;
 
-        @keyframes balanceo {
-            0%, 100% {
-                transform: translateX(-50%) rotate(-2deg);
-            }
+    top: 8%;
+    right: 9%;
 
-            50% {
-                transform: translateX(-50%) rotate(2deg);
-            }
-        }
+    border-radius: 50%;
 
-        /* Tallos */
-        .tallo {
-            position: absolute;
-            width: 12px;
-            height: 300px;
-            background: #20833b;
-            bottom: -130px;
-            border-radius: 10px;
-            left: 50%;
-            transform: translateX(-50%);
-        }
+    background: #fff5c7;
 
-        .hoja {
-            position: absolute;
-            width: 80px;
-            height: 30px;
-            background: #248c3e;
-            border-radius: 100% 0 100% 0;
-        }
+    box-shadow:
+        0 0 20px rgba(255,244,190,.45),
+        0 0 60px rgba(255,224,155,.25);
+}
 
-        .hoja1 {
-            left: -65px;
-            top: 120px;
-            transform: rotate(15deg);
-        }
+.moon::before {
+    content: "";
+    position: absolute;
 
-        .hoja2 {
-            right: -65px;
-            top: 180px;
-            transform: rotate(-15deg);
-        }
+    width: 18px;
+    height: 18px;
 
-        /* Tierra */
-        .tierra {
-            position: absolute;
-            bottom: -110px;
-            left: -5%;
-            width: 110%;
-            height: 250px;
-            background: #0b2c20;
-            border-radius: 50% 50% 0 0;
-        }
+    top: 35px;
+    left: 30px;
 
-        /* Hojas cayendo */
-        .hoja-caida {
-            position: absolute;
-            color: #d79a3b;
-            font-size: 30px;
-            animation: caer 7s linear infinite;
-        }
+    border-radius: 50%;
 
-        .caida1 {
-            left: 15%;
-            top: -50px;
-        }
+    background: rgba(220,196,140,.12);
+}
 
-        .caida2 {
-            right: 20%;
-            top: -100px;
-            animation-delay: 2s;
-        }
+.moon::after {
+    content: "";
+    position: absolute;
 
-        @keyframes caer {
-            0% {
-                transform: translateY(-50px) rotate(0deg);
-                opacity: 0;
-            }
+    width: 10px;
+    height: 10px;
 
-            15% {
-                opacity: 1;
-            }
+    bottom: 30px;
+    right: 28px;
 
-            100% {
-                transform: translateY(100vh) rotate(360deg);
-                opacity: 0;
-            }
-        }
+    border-radius: 50%;
 
-        /* Ajuste para celulares */
-        @media (max-width: 600px) {
+    background: rgba(220,196,140,.13);
+}
 
-            .texto h1 {
-                font-size: 58px;
-            }
+/* =========================
+   MENSAJE
+========================= */
 
-            .luna {
-                width: 145px;
-                height: 145px;
-                right: 35px;
-                top: 100px;
-            }
+.message {
+    position: absolute;
 
-            .flor-grande {
-                transform: translateX(-50%) scale(0.85);
-            }
+    top: 11%;
+    left: 50%;
 
-            .flor-izquierda {
-                left: -35px;
-                transform: scale(0.58);
-            }
+    transform: translateX(-50%);
 
-            .flor-derecha {
-                right: -45px;
-                transform: scale(0.58);
-            }
-        }
-    </style>
+    z-index: 10;
+
+    width: 10%;
+
+    text-align: center;
+
+    color: #fff5c9;
+
+    animation: appear 1.5s ease forwards;
+}
+
+.message h1 {
+    font-size: clamp(65px, 18vw, 105px);
+
+    font-weight: 500;
+
+    letter-spacing: 3px;
+
+    text-shadow:
+        0 3px 15px rgba(0,0,0,.2),
+        0 0 30px rgba(255,226,145,.12);
+}
+
+.message .sunflower-icon {
+    display: block;
+
+    margin-top: 5px;
+
+    font-family: sans-serif;
+
+    font-size: 38px;
+
+    animation: floating 3s ease-in-out infinite;
+}
+
+@keyframes appear {
+    from {
+        opacity: 0;
+        transform: translate(-50%, -20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translate(-50%, 0);
+    }
+}
+
+@keyframes floating {
+    0%,100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-7px);
+    }
+}
+
+/* =========================
+   CAMPO
+========================= */
+
+.ground {
+    position: absolute;
+
+    bottom: -15%;
+
+    left: -10%;
+
+    width: 120%;
+    height: 32%;
+
+    background: #102b20;
+
+    border-radius: 50% 50% 0 0;
+
+    z-index: 6;
+}
+
+/* =========================
+   FLORES
+========================= */
+
+.flower {
+    position: absolute;
+
+    z-index: 5;
+
+    transform-origin: bottom center;
+
+    animation: sway 5s ease-in-out infinite;
+}
+
+.flower.big {
+    width: 210px;
+    height: 430px;
+
+    left: 50%;
+    bottom: 5%;
+
+    transform: translateX(-50%);
+}
+
+.flower.small-left {
+    width: 145px;
+    height: 320px;
+
+    left: -5%;
+    bottom: 5%;
+
+    transform: scale(.8);
+
+    animation-delay: -1s;
+}
+
+.flower.small-right {
+    width: 150px;
+    height: 330px;
+
+    right: -4%;
+    bottom: 4%;
+
+    transform: scale(.82);
+
+    animation-delay: -2s;
+}
+
+@keyframes sway {
+    0%,100% {
+        rotate: -2deg;
+    }
+
+    50% {
+        rotate: 2deg;
+    }
+}
+
+/* TALLO */
+
+.stem {
+    position: absolute;
+
+    bottom: 0;
+    left: 50%;
+
+    width: 11px;
+    height: 72%;
+
+    transform: translateX(-50%);
+
+    background: linear-gradient(
+        to right,
+        #12672d,
+        #2f9b43,
+        #155d2b
+    );
+
+    border-radius: 10px;
+}
+
+/* HOJAS */
+
+.leaf {
+    position: absolute;
+
+    width: 85px;
+    height: 38px;
+
+    background: linear-gradient(
+        135deg,
+        #258c3e,
+        #0d5728
+    );
+
+    border-radius: 100% 0 100% 0;
+}
+
+.leaf.left {
+    left: 5%;
+    bottom: 37%;
+
+    rotate: -25deg;
+}
+
+.leaf.right {
+    right: 2%;
+    bottom: 47%;
+
+    rotate: 25deg;
+
+    transform: scaleX(-1);
+}
+
+/* CABEZA DE LA FLOR */
+
+.head {
+    position: absolute;
+
+    width: 155px;
+    height: 155px;
+
+    left: 50%;
+    top: 0;
+
+    transform: translateX(-50%);
+
+    z-index: 3;
+}
+
+/* pétalos */
+
+.petal {
+    position: absolute;
+
+    width: 62px;
+    height: 90px;
+
+    left: 47px;
+    top: 33px;
+
+    border-radius: 55% 55% 48% 48%;
+
+    background: linear-gradient(
+        145deg,
+        #ffe947,
+        #ffc400
+    );
+
+    transform-origin: 31px 45px;
+
+    box-shadow:
+        inset -4px -5px 8px rgba(180,110,0,.15),
+        0 2px 8px rgba(80,50,0,.1);
+}
+
+.p1 { transform: rotate(0deg) translateY(-37px); }
+.p2 { transform: rotate(45deg) translateY(-37px); }
+.p3 { transform: rotate(90deg) translateY(-37px); }
+.p4 { transform: rotate(135deg) translateY(-37px); }
+.p5 { transform: rotate(180deg) translateY(-37px); }
+.p6 { transform: rotate(225deg) translateY(-37px); }
+.p7 { transform: rotate(270deg) translateY(-37px); }
+.p8 { transform: rotate(315deg) translateY(-37px); }
+
+/* centro */
+
+.center {
+    position: absolute;
+
+    width: 65px;
+    height: 65px;
+
+    left: 45px;
+    top: 45px;
+
+    z-index: 10;
+
+    border-radius: 50%;
+
+    background:
+        radial-gradient(
+            circle at 35% 30%,
+            #b66b12,
+            #713500 65%,
+            #4a2100
+        );
+
+    box-shadow:
+        inset 0 5px 8px rgba(255,180,50,.2),
+        0 4px 8px rgba(0,0,0,.2);
+}
+
+/* =========================
+   PÉTALOS FLOTANDO
+========================= */
+
+.floating-petal {
+    position: absolute;
+
+    z-index: 8;
+
+    width: 13px;
+    height: 7px;
+
+    border-radius: 100% 0 100% 0;
+
+    background: #f5bd32;
+
+    animation: fall linear infinite;
+}
+
+.fp1 {
+    left: 12%;
+    top: -10%;
+    animation-duration: 8s;
+}
+
+.fp2 {
+    left: 78%;
+    top: -15%;
+    animation-duration: 10s;
+    animation-delay: 2s;
+}
+
+.fp3 {
+    left: 55%;
+    top: -5%;
+    animation-duration: 9s;
+    animation-delay: 4s;
+}
+
+.fp4 {
+    left: 90%;
+    top: 15%;
+    animation-duration: 11s;
+    animation-delay: 1s;
+}
+
+@keyframes fall {
+    0% {
+        transform:
+            translateY(-40px)
+            translateX(0)
+            rotate(0deg);
+
+        opacity: 0;
+    }
+
+    15% {
+        opacity: .9;
+    }
+
+    50% {
+        transform:
+            translateY(45vh)
+            translateX(-35px)
+            rotate(180deg);
+    }
+
+    100% {
+        transform:
+            translateY(105vh)
+            translateX(45px)
+            rotate(360deg);
+
+        opacity: 0;
+    }
+}
+
+/* =========================
+   AJUSTE CELULAR
+========================= */
+
+@media (max-width: 600px) {
+
+    .moon {
+        width: 115px;
+        height: 115px;
+
+        top: 9%;
+        right: 7%;
+    }
+
+    .message {
+        top: 13%;
+    }
+
+    .message h1 {
+        font-size: 70px;
+    }
+
+    .message .sunflower-icon {
+        font-size: 32px;
+    }
+
+    .flower.big {
+        bottom: 4%;
+        transform: translateX(-50%) scale(.82);
+    }
+
+    .flower.small-left {
+        left: -28px;
+        bottom: 5%;
+        transform: scale(.65);
+    }
+
+    .flower.small-right {
+        right: -30px;
+        bottom: 4%;
+        transform: scale(.67);
+    }
+
+    .ground {
+        bottom: -12%;
+        height: 28%;
+    }
+}
+</style>
 </head>
 
 <body>
 
-<div class="contenedor">
+<div class="scene">
 
-    <div class="luna"></div>
+    <div class="horizon-glow"></div>
 
-    <div class="estrella e1">•</div>
-    <div class="estrella e2">•</div>
-    <div class="estrella e3">•</div>
+    <!-- ESTRELLAS -->
+    <div class="stars">
+        <span class="star s1"></span>
+        <span class="star s2"></span>
+        <span class="star s3"></span>
+        <span class="star s4"></span>
+        <span class="star s5"></span>
+        <span class="star s6"></span>
+        <span class="star s7"></span>
+    </div>
 
-    <div class="texto">
+    <!-- LUNA -->
+    <div class="moon"></div>
+
+    <!-- MENSAJE -->
+    <div class="message">
         <h1>Ola</h1>
-        <div class="flor">🌻</div>
+        <span class="sunflower-icon">🌻</span>
     </div>
 
-    <div class="flores">
+    <!-- PÉTALOS -->
+    <span class="floating-petal fp1"></span>
+    <span class="floating-petal fp2"></span>
+    <span class="floating-petal fp3"></span>
+    <span class="floating-petal fp4"></span>
 
-        <!-- Flor izquierda -->
-        <div class="flor-izquierda">
-            <div class="tallo"></div>
-            <div class="hoja hoja1"></div>
+    <!-- FLOR IZQUIERDA -->
+    <div class="flower small-left">
 
-            <div class="petalo p1"></div>
-            <div class="petalo p2"></div>
-            <div class="petalo p3"></div>
-            <div class="petalo p4"></div>
-            <div class="petalo p5"></div>
-            <div class="petalo p6"></div>
-            <div class="centro"></div>
-        </div>
+        <div class="stem"></div>
 
-        <!-- Flor central -->
-        <div class="flor-grande">
-            <div class="tallo"></div>
-            <div class="hoja hoja1"></div>
-            <div class="hoja hoja2"></div>
+        <div class="leaf left"></div>
 
-            <div class="petalo p1"></div>
-            <div class="petalo p2"></div>
-            <div class="petalo p3"></div>
-            <div class="petalo p4"></div>
-            <div class="petalo p5"></div>
-            <div class="petalo p6"></div>
-            <div class="centro"></div>
-        </div>
+        <div class="head">
+            <div class="petal p1"></div>
+            <div class="petal p2"></div>
+            <div class="petal p3"></div>
+            <div class="petal p4"></div>
+            <div class="petal p5"></div>
+            <div class="petal p6"></div>
+            <div class="petal p7"></div>
+            <div class="petal p8"></div>
 
-        <!-- Flor derecha -->
-        <div class="flor-derecha">
-            <div class="tallo"></div>
-            <div class="hoja hoja2"></div>
-
-            <div class="petalo p1"></div>
-            <div class="petalo p2"></div>
-            <div class="petalo p3"></div>
-            <div class="petalo p4"></div>
-            <div class="petalo p5"></div>
-            <div class="petalo p6"></div>
-            <div class="centro"></div>
+            <div class="center"></div>
         </div>
 
     </div>
 
-    <div class="tierra"></div>
+    <!-- FLOR CENTRAL -->
+    <div class="flower big">
 
-    <div class="hoja-caida caida1">🍂</div>
-    <div class="hoja-caida caida2">🍂</div>
+        <div class="stem"></div>
+
+        <div class="leaf left"></div>
+        <div class="leaf right"></div>
+
+        <div class="head">
+
+            <div class="petal p1"></div>
+            <div class="petal p2"></div>
+            <div class="petal p3"></div>
+            <div class="petal p4"></div>
+            <div class="petal p5"></div>
+            <div class="petal p6"></div>
+            <div class="petal p7"></div>
+            <div class="petal p8"></div>
+
+            <div class="center"></div>
+
+        </div>
+
+    </div>
+
+    <!-- FLOR DERECHA -->
+    <div class="flower small-right">
+
+        <div class="stem"></div>
+
+        <div class="leaf right"></div>
+
+        <div class="head">
+
+            <div class="petal p1"></div>
+            <div class="petal p2"></div>
+            <div class="petal p3"></div>
+            <div class="petal p4"></div>
+            <div class="petal p5"></div>
+            <div class="petal p6"></div>
+            <div class="petal p7"></div>
+            <div class="petal p8"></div>
+
+            <div class="center"></div>
+
+        </div>
+
+    </div>
+
+    <!-- TIERRA -->
+    <div class="ground"></div>
 
 </div>
 
